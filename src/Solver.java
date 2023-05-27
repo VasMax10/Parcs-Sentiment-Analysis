@@ -69,7 +69,7 @@ public class Solver {
             channel c = p.createChannel();
             channels.add(c);
 
-            System.out.println("Num of lists in thread : " + dividedLists.get(i));
+            System.out.println("Num of lists in thread : " + dividedLists.get(i).size());
 
             Input input = new Input(dividedLists.get(i), positive_words, negative_words);
 
