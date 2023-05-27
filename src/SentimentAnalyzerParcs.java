@@ -3,35 +3,12 @@ import parcs.*;
 import java.util.List;
 
 public class SentimentAnalyzerParcs implements AM {
-//    static int NO_OF_CHARS = 256;
-//
-//    //A utility function to get maximum of two integers
-//    static int max(int a, int b) {
-//        return (a > b) ? a : b;
-//    }
-//
-//    static void badCharHeuristic( String pattern, int size,int badchar[])
-//    {
-//        int i;
-//
-//        // Initialize all occurrences as -1
-//        for (i = 0; i < NO_OF_CHARS; i++)
-//            badchar[i] = -1;
-//
-//        // Fill the actual value of last occurrence
-//        // of a character
-//        for (i = 0; i < size; i++)
-//            badchar[(int) pattern.charAt(i)] = i;
-//    }
 
-    // A pattern searching function that uses Bad Character Heuristic of Boyer Moore Algorithm
-    public Result AnalyzeSentiment(String text, List<String> positive, List<String> negative) {
+    public Result AnalyzeSentiment(List<String> sentences, List<String> positive, List<String> negative) {
 
         Result result = new Result();
 
-//        String[] positiveWords = positive.split("[ ,\"']");
-//        String[] negativeWords = negative.split("[ ,\"']");
-        int n = text.length();
+        int count = sentences.size();
 
         return result;
     }
@@ -39,13 +16,13 @@ public class SentimentAnalyzerParcs implements AM {
     public void run(AMInfo info) {
         Input input = (Input) info.parent.readObject();
 
-        String text = input.getText();
+        List<String> sentences = input.getSentences();
         List<String> positive = input.getPositive();
         List<String> negative = input.getNegative();
 
-        System.out.println("Input : text = " + text + ", positive = " + positive + ", negative = " + negative);
+        System.out.println("Input : text = " + sentences.get(0) + ", positive = " + positive + ", negative = " + negative);
 
-        info.parent.write(AnalyzeSentiment(text, positive, negative));
+        info.parent.write(AnalyzeSentiment(sentences, positive, negative));
     }
 }
 

@@ -59,6 +59,7 @@ public class Solver {
 
         System.out.println("Number of sentences: " + count);
 
+        List<List<String>> dividedLists = divideList(non_empty_sentences, nThreads);
 
         for (int i = 0; i < nThreads; i++) {
 
@@ -68,7 +69,7 @@ public class Solver {
             channel c = p.createChannel();
             channels.add(c);
 
-            Input input = new Input(text, positive_words, negative_words);
+            Input input = new Input(dividedLists.get(i), positive_words, negative_words);
 
             points.get(i).execute("SentimentAnalyzerParcs");
             channels.get(i).write(input);
@@ -78,6 +79,7 @@ public class Solver {
             Result result = (Result) (channels.get(i).readObject());
 
             Integer negCount = result.getNegativeCount();
+
             System.out.println(negCount);
 
         }
@@ -85,6 +87,7 @@ public class Solver {
 
         curtask.end();
     }
+
     public static String textFromFile(String filename) throws Exception {
 
         String text = new Scanner(new File(filename)).useDelimiter("\\Z").next();
@@ -100,6 +103,40 @@ public class Solver {
 
         return pattern;
     }
+
+    public static List<List<String>> divideList(List<String> originalList, int numberOfDivisions) {
+        List<List<String>> dividedLists = new ArrayList<>();
+
+        int listSize = originalList.size();
+        int sublistSize = listSize / numberOfDivisions;
+        int mod = listSize % numberOfDivisions;
+
+        System.out.println("mod = " + mod);
+
+        int startIndex = 0;
+        int endIndex = sublistSize;
+
+        for (int i = 0; i < numberOfDivisions; i++) {
+            if (i == numberOfDivisions - 1) {
+                // Last sublist may have different size
+                endIndex = listSize;
+            }
+
+            if (mod > 0){
+                endIndex++;
+                mod--;
+            }
+
+            List<String> sublist = originalList.subList(startIndex, endIndex);
+            dividedLists.add(sublist);
+
+            startIndex = endIndex;
+            endIndex += sublistSize;
+        }
+
+        return dividedLists;
+    }
+
 }
 
 

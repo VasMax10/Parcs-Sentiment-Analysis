@@ -2,18 +2,18 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Input implements Serializable {
-    private String text;
+    private List<String> sentences;
     private List<String> positive;
     private List<String> negative;
 
-    public Input(String text, List<String> positive, List<String> negative) {
-        this.text = text;
+    public Input(List<String> sentences, List<String> positive, List<String> negative) {
+        this.sentences = sentences;
         this.positive = positive;
         this.negative = negative;
     }
 
-    public String getText() {
-        return text;
+    public List<String> getSentences() {
+        return sentences;
     }
 
     public List<String> getPositive() {
