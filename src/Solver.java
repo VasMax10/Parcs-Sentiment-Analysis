@@ -59,8 +59,6 @@ public class Solver {
 
 
         for (int i = 0; i < count; i++) {
-            String t = texts.get(i);
-            Integer shift = shifts.get(i);
 
             point p = info.createPoint();
             points.add(p);
@@ -82,7 +80,7 @@ public class Solver {
             if (ins.size() > 0) {
                 System.out.println("Pattern ins : {");
                 for (int index : ins) {
-                    System.out.print(shift + index + " ");
+                    System.out.print(index + " ");
                 }
                 System.out.println("}");
             }
