@@ -66,8 +66,6 @@ public class Solver {
             channel c = p.createChannel();
             channels.add(c);
 
-            System.out.println(words.get(0) + " -- " + non_empty_sentences.get(i));
-
             Input input = new Input(text, words.get(0), negative);
 
             points.get(i).execute("SentimentAnalyzerParcs");
@@ -75,20 +73,11 @@ public class Solver {
 
             System.out.println("Waiting for result .. ");
 
-
-
             Result result = (Result) (channels.get(i).readObject());
 
             Integer negCount = result.getNegativeCount();
             System.out.println(negCount);
-//            List<Integer> ins = result.getRes();
-//            if (ins.size() > 0) {
-//                System.out.println("Pattern ins : {");
-//                for (int index : ins) {
-//                    System.out.print(index + " ");
-//                }
-//                System.out.println("}");
-//            }
+
         }
 
 
