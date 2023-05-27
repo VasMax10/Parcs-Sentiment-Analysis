@@ -48,13 +48,16 @@ public class Solver {
             Integer shift = shifts.get(i);
 
             point p = info.createPoint();
+            points.add(p);
+
             channel c = p.createChannel();
+            channels.add(c);
 
 //            points.add(info.createPoint());
 //            channels.add(points.get(i).createChannel());
 //
-            points.add(p);
-            channels.add(c);
+
+
 
             System.out.println(words.get(i));
 
