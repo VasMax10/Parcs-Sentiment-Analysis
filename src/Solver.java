@@ -78,6 +78,40 @@ public class Solver {
 
         result = (Result) (channels.get(1).readObject());
 
+        point p3 = info.createPoint();
+        points.add(p3);
+
+        channel c3 = p3.createChannel();
+        channels.add(c3);
+
+        System.out.println(words.get(2));
+
+        input = new Input(text, words.get(2), negative);
+
+        points.get(2).execute("SentimentAnalyzerParcs");
+        channels.get(2).write(input);
+
+        System.out.println("Waiting for result .. ");
+
+        result = (Result) (channels.get(2).readObject());
+
+        point p4 = info.createPoint();
+        points.add(p4);
+
+        channel c4 = p4.createChannel();
+        channels.add(c4);
+
+        System.out.println(words.get(3));
+
+        input = new Input(text, words.get(3), negative);
+
+        points.get(3).execute("SentimentAnalyzerParcs");
+        channels.get(3).write(input);
+
+        System.out.println("Waiting for result .. ");
+
+        result = (Result) (channels.get(3).readObject());
+
 //        for (int i = 0; i < nThreads; i++) {
 //            String t = texts.get(i);
 //            Integer shift = shifts.get(i);
