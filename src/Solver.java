@@ -69,12 +69,15 @@ public class Solver {
             channel c = p.createChannel();
             channels.add(c);
 
+            System.out.println("Num of lists in thread : " + dividedLists.get(i));
+
             Input input = new Input(dividedLists.get(i), positive_words, negative_words);
 
             points.get(i).execute("SentimentAnalyzerParcs");
             channels.get(i).write(input);
 
             System.out.println("Waiting for result .. ");
+
 
             Result result = (Result) (channels.get(i).readObject());
 
