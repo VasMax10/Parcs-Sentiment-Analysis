@@ -2,19 +2,25 @@ import java.io.Serializable;
 
 public class Input implements Serializable {
     private String text;
-    private String pattern;
+    private String positive;
+    private String negative;
 
-    public Input(String text, String pattern) {
+    public Input(String text, String positive, String negative) {
         this.text = text;
-        this.pattern = pattern;
+        this.positive = positive;
+        this.negative = negative;
     }
 
     public String getText() {
         return text;
     }
 
-    public String getPattern() {
-        return pattern;
+    public String getPositive() {
+        return positive;
+    }
+
+    public String getNegative() {
+        return negative;
     }
 }
 

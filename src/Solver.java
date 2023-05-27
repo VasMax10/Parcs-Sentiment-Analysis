@@ -47,22 +47,25 @@ public class Solver {
             String t = texts.get(i);
             Integer shift = shifts.get(i);
 
-            point p = info.createPoint();
-            channel c = p.createChannel();
+//            point p = info.createPoint();
+//            channel c = p.createChannel();
 
-            points.add(p);
-            channels.add(c);
+            points.add(info.createPoint());
+            channels.add(points.get(i).createChannel());
+
+//            points.add(p);
+//            channels.add(c);
 
             System.out.println(positive);
 
-            Input input = new Input(t, positive);
+            Input input = new Input(t, positive, negative);
 
-            p.execute("SentimentAnalyzerParcs");
-            c.write(input);
+            points.get(i).execute("SentimentAnalyzerParcs");
+            channels.get(i).write(input);
 
             System.out.println("Waiting for result .. ");
 
-            Result result = (Result) (c.readObject());
+            Result result = (Result) (channels.get(i).readObject());
             List<Integer> ins = result.getRes();
             if (ins.size() > 0) {
                 System.out.println("Pattern ins : {");
