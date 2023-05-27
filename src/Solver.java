@@ -80,7 +80,7 @@ public class Solver {
             Result result = (Result) (channels.get(i).readObject());
 
             Integer negCount = result.getNegativeCount();
-            System.out.println();
+            System.out.println(negCount);
 //            List<Integer> ins = result.getRes();
 //            if (ins.size() > 0) {
 //                System.out.println("Pattern ins : {");
