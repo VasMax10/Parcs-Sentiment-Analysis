@@ -4,11 +4,41 @@ import java.util.List;
 
 public class SentimentAnalyzerParcs implements AM {
 
-    public Result AnalyzeSentiment(List<String> sentences, List<String> positive, List<String> negative) {
+    public Result AnalyzeSentiment(List<String> sentences, List<String> positiveWords, List<String> negativeWords) {
 
         Result result = new Result();
 
-        int count = sentences.size();
+        int positiveCount = 0;
+        int negativeCount = 0;
+
+        for (String sentence : sentences){
+            // Convert the sentence to lowercase for case-insensitive matching
+            sentence = sentence.toLowerCase();
+
+            // Split the sentence into words
+            String[] words = sentence.split("[ ,\"']");
+
+            // Iterate through each word and check if it is a positive or negative word
+            for (String word : words) {
+                if (positiveWords.contains(word)) {
+                    positiveCount++;
+                } else if (negativeWords.contains(word)) {
+                    negativeCount++;
+                }
+            }
+
+//            // Determine the sentiment based on the counts
+//            System.out.println(positiveCount + " " + negativeCount);
+//            if (positiveCount > negativeCount) {
+//                return "Positive";
+//            } else if (negativeCount > positiveCount) {
+//                return "Negative";
+//            } else {
+//                return "Neutral";
+//            }
+        }
+        result.setNegativeCount(negativeCount);
+        result.setPositiveCount(positiveCount);
 
         return result;
     }

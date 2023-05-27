@@ -78,12 +78,12 @@ public class Solver {
 
             System.out.println("Waiting for result .. ");
 
-
             Result result = (Result) (channels.get(i).readObject());
 
+            Integer posCount = result.getPositiveCount();
             Integer negCount = result.getNegativeCount();
 
-            System.out.println(negCount);
+            System.out.println(posCount + " " + negCount);
 
         }
 
