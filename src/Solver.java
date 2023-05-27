@@ -57,7 +57,9 @@ public class Solver {
             channels.get(i).write(input);
 
             System.out.println("Waiting for result .. ");
+        }
 
+        for (int i = 0; i < nThreads; i++){
             Result result = (Result) (channels.get(i).readObject());
 
             Integer posCount = result.getPositiveCount();
