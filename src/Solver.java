@@ -13,13 +13,14 @@ public class Solver {
         curtask.addJarFile("SentimentAnalyzerParcs.jar");
 
         String text = textFromFile( curtask.findFile("input") );
-        String pattern = patternFromFile( curtask.findFile("pattern"));
+        String positive = sentimentFromFile( curtask.findFile("positive_words.txt"));
+        String negative = sentimentFromFile( curtask.findFile("negative_words.txt"));
 
         AMInfo info = new AMInfo(curtask, null);
 
         int N = 4;
         int n = text.length() / N;
-        int M = pattern.length();
+        int M = positive.length();
 
         List<String> texts = new ArrayList<>();
         List<Integer> shifts = new ArrayList<>();
@@ -52,7 +53,7 @@ public class Solver {
             points.add(p);
             channels.add(c);
 
-            Input input = new Input(t, pattern);
+            Input input = new Input(t, positive);
 
             p.execute("SentimentAnalyzerParcs");
             c.write(input);
@@ -79,7 +80,7 @@ public class Solver {
 
         return text;
     }
-    public static String patternFromFile(String filename) throws Exception {
+    public static String sentimentFromFile(String filename) throws Exception {
         String pattern = "";
 
         Scanner sc = new Scanner(new File(filename));
@@ -89,6 +90,8 @@ public class Solver {
         return pattern;
     }
 }
+
+
 
 //import  java.io.*;
 //import java.util.*;
