@@ -62,7 +62,9 @@ public class Solver{
             points.add(p);
             channels.add(c);
 
-            Input input = new Input(positiveWords, negativeWords, dividedLists.get(i));
+            Input input = new Input(
+//                    positiveWords, negativeWords,
+                    dividedLists.get(i));
 
             p.execute("SentimentAnalyzerParcs");
             c.write(input);
