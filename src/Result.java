@@ -5,6 +5,9 @@ import java.util.List;
 public class Result implements Serializable {
     List<Integer> res;
 
+    private Integer negativeCount;
+    private Integer positiveCount;
+
     public Result() {
         res = new ArrayList<>();
     }
@@ -15,6 +18,14 @@ public class Result implements Serializable {
 
     public List<Integer> getRes() {
         return res;
+    }
+
+    public Integer getPositiveCount() {
+        return positiveCount;
+    }
+
+    public Integer getNegativeCount() {
+        return negativeCount;
     }
 }
 
