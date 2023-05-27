@@ -75,7 +75,7 @@ public class Solver {
 
             System.out.println("Waiting for result .. ");
 
-            Result result = (Result) (channels.get(i).readObject());
+//            Result result = (Result) (channels.get(i).readObject());
 //            List<Integer> ins = result.getRes();
 //            if (ins.size() > 0) {
 //                System.out.println("Pattern ins : {");
