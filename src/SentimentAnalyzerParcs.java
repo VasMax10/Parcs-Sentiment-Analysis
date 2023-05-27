@@ -79,8 +79,8 @@ public class SentimentAnalyzerParcs implements AM {
 //////        int input = amInfo.parent.readInt();
 ////        System.out.println("Got Input");
 ////
-//////        List<String> negativeWords = new ArrayList<>(input.getNegativeWords());
-//////        System.out.println("Negative");
+//        List<String> negativeWords = new ArrayList<>(input.getNegativeWords());
+//        System.out.println("Negative");
 //////        List<String> positiveWords = new ArrayList<>(input.getPositiveWords());
 //////        System.out.println("Positive");
 ////        List<String> sentences     = new ArrayList<>(input.getSentences());
