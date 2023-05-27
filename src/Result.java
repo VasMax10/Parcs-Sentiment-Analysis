@@ -5,8 +5,8 @@ import java.util.List;
 public class Result implements Serializable {
 //    List<Integer> res;
 
-    private Integer negativeCount;
-    private Integer positiveCount;
+    private Integer negativeCount = 0;
+    private Integer positiveCount = 0;
 
     public Result() {
         negativeCount = 0;
