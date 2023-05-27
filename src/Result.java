@@ -16,9 +16,9 @@ public class Result implements Serializable {
         res.add(index);
     }
 
-    public List<Integer> getRes() {
-        return List.of(1,2);
-    }
+//    public List<Integer> getRes() {
+//        return List.of(1,2);
+//    }
 
     public Integer getPositiveCount() {
         return positiveCount;
