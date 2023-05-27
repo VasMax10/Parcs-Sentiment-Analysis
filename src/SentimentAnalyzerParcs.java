@@ -58,13 +58,12 @@ public class SentimentAnalyzerParcs implements AM {
 
     public void run(AMInfo info) {
         Input input = (Input) info.parent.readObject();
-        
+
         String text = input.getText();
         String positive = input.getPositive();
+        String negative = input.getNegative();
 
-//        String negative = input.getNegative();
-
-        System.out.println("Input : text = " + text + ", positive = " + positive);
+        System.out.println("Input : text = " + text + ", positive = " + positive + ", negative = " + negative);
 
         info.parent.write(search(text, positive));
     }
