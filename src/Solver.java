@@ -29,19 +29,20 @@ public class Solver {
             points.add(p);
             channels.add(c);
 
-//            Input input = new Input(t, pattern);
+            Input input = new Input(positive, negative, text);
 
             p.execute("SentimentAnalyzerParcs");
-            c.write(text);
-            c.write(negative);
-            c.write(positive);
+            c.write(input);
 
             System.out.println("Waiting for result .. ");
 
 //            Result result = (Result) (c.readObject());
-            String result = (String) (c.readObject());
-
-            System.out.println(result);
+//            String result = (String) (c.readObject());
+            Input result = (Input) (c.readObject());
+            System.out.println(input.getText());
+            System.out.println(input.getNegative());
+            System.out.println(input.getPositive());
+//            System.out.println(result);
 //            List<Integer> ins = result.getRes();
 //            if (ins.size() > 0) {
 //                System.out.println("Pattern ins : {");

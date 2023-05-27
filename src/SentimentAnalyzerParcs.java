@@ -8,13 +8,11 @@ import parcs.*;
 public class SentimentAnalyzerParcs {
     public void run(AMInfo info) {
 
-        String text = (String) info.parent.readObject();
-        String negative = (String) info.parent.readObject();
-        String positive = (String) info.parent.readObject();
+        Input input = (Input) (info.parent.readObject());
 
-        System.out.println("Input : text = " + text + ", negative = " + negative + ", positive = " + positive);
+        System.out.println("Input : text = " + input.getText() + ", negative = " + input.getNegative() + ", positive = " + input.getPositive());
 
-        info.parent.write(text);
+        info.parent.write(input);
     }
 }
 //
