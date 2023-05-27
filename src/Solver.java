@@ -70,8 +70,8 @@ public class Solver {
             channels.add(c);
 
             System.out.println("Num of lists in thread : " + dividedLists.get(i).size());
-            List<String> toSend = dividedLists.get(i);
-            Input input = new Input(toSend, positive_words, negative_words);
+
+            Input input = new Input(dividedLists.get(i), positive_words, negative_words);
 
             points.get(i).execute("SentimentAnalyzerParcs");
             channels.get(i).write(input);

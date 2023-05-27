@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Input implements Serializable {
@@ -7,9 +8,15 @@ public class Input implements Serializable {
     private List<String> negative;
 
     public Input(List<String> sentences, List<String> positive, List<String> negative) {
-        this.sentences = sentences;
-        this.positive = positive;
-        this.negative = negative;
+
+        this.sentences = new ArrayList<>();
+        this.sentences.addAll(sentences);
+
+        this.positive = new ArrayList<>();
+        this.positive.addAll(positive);
+
+        this.negative = new ArrayList<>();
+        this.negative.addAll(negative);
     }
 
     public List<String> getSentences() {

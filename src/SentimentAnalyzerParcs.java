@@ -14,6 +14,7 @@ public class SentimentAnalyzerParcs implements AM {
     }
 
     public void run(AMInfo info) {
+
         Input input = (Input) info.parent.readObject();
 
         List<String> sentences = input.getSentences();
