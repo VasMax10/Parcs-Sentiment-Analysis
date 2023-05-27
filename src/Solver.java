@@ -17,7 +17,7 @@ public class Solver {
 
         AMInfo info = new AMInfo(curtask, null);
 
-        int N = 20;
+        int N = 4;
         int n = text.length() / N;
         int M = pattern.length();
 
