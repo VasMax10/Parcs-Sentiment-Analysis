@@ -3,23 +3,10 @@ import java.util.*;
 
 import parcs.*;
 
-public class Solver implements AM{
-
-    public static void main(String[] args){
+public class Solver{
+    public static void main(String[] args) throws Exception {
         task curtask = new task();
-
         curtask.addJarFile("SentimentAnalyzerParcs.jar");
-
-        System.out.println("The Solver class method 'main' has added jar file 'SentimentAnalyzerParcs.jar'");
-
-        (new Solver()).run(new AMInfo(curtask, (channel) null));
-
-        System.out.println("The Solver class method 'main' has finished its work");
-        curtask.end();
-    }
-
-    @Override
-    public void run(AMInfo amInfo) {
 
         int nThreads;
 
@@ -27,7 +14,7 @@ public class Solver implements AM{
 
         try
         {
-            BufferedReader in = new BufferedReader(new FileReader(amInfo.curtask.findFile("input_small.txt")));
+            BufferedReader in = new BufferedReader(new FileReader(curtask.findFile("input_small.txt")));
 
             nThreads = Integer.parseInt(in.readLine());
             String line;
@@ -43,8 +30,10 @@ public class Solver implements AM{
             return;
         }
 
-        List<String> positiveWords = readListFromFile(amInfo, "positive_words.txt");
-        List<String> negativeWords = readListFromFile(amInfo,"negative_words.txt");
+        List<String> positiveWords = readListFromFile(curtask.findFile("positive_words.txt"));
+        List<String> negativeWords = readListFromFile(curtask.findFile("negative_words.txt"));
+
+        AMInfo info = new AMInfo(curtask, null);
 
         List<String> sentences = List.of(full_text.toString().split("[.!?]"));
         List<String> non_empty_sentences = new ArrayList<>();
@@ -61,22 +50,13 @@ public class Solver implements AM{
 
         List<List<String>> dividedLists = divideList(non_empty_sentences, nThreads);
 
-        List<point> points = new ArrayList<point>();
-        List<channel> channels = new ArrayList<channel>();
 
-        // Connection to points
+        List<point> points = new ArrayList<>();
+        List<channel> channels = new ArrayList<>();
 
-        // Time counting
-        long tStart = System.nanoTime();
+        for (int i = 0; i < nThreads; i++){
 
-        int totalNegative = 0;
-        int totalPositive = 0;
-
-        for(int i = 0; i < nThreads; i++)
-        {
-            System.out.println(i);
-
-            point p = amInfo.createPoint();
+            point p = info.createPoint();
             channel c = p.createChannel();
 
             points.add(p);
@@ -84,35 +64,128 @@ public class Solver implements AM{
 
             Input input = new Input(positiveWords, negativeWords, dividedLists.get(i));
 
-            System.out.println(positiveWords.get(0));
-            System.out.println(negativeWords.get(0));
-            System.out.println(dividedLists.get(i).get(0));
-
             p.execute("SentimentAnalyzerParcs");
-            c.write(123);
+            c.write(input);
 
-            System.out.println("Waiting for the result...");
+            System.out.println("Waiting for result .. ");
 
             Result result = (Result) (c.readObject());
-
-            totalPositive += result.getTotalPositive();
-            totalNegative += result.getTotalNegative();
-
+            System.out.println(result.getTotalNegative());
+            System.out.println(result.getTotalPositive());
         }
-
-        long tEnd = System.nanoTime();
-
-        if (totalPositive > totalNegative) {
-            System.out.println("Positive");
-        } else if (totalNegative > totalPositive) {
-            System.out.println("Negative");
-        } else {
-            System.out.println("Neutral");
-        }
-
-        System.out.println("Working time on " + nThreads + " processes: " + ((tEnd - tStart) / 1000000) + "ms");
+        curtask.end();
     }
 
+//public class Solver implements AM{
+//
+//    public static void main(String[] args){
+//        task curtask = new task();
+//
+//        curtask.addJarFile("SentimentAnalyzerParcs.jar");
+//
+//        System.out.println("The Solver class method 'main' has added jar file 'SentimentAnalyzerParcs.jar'");
+//
+//        (new Solver()).run(new AMInfo(curtask, null));
+//
+//        System.out.println("The Solver class method 'main' has finished its work");
+//        curtask.end();
+//    }
+//
+//    @Override
+//    public void run(AMInfo amInfo) {
+//
+//        int nThreads;
+//
+//        StringBuilder full_text = new StringBuilder();
+//
+//        try
+//        {
+//            BufferedReader in = new BufferedReader(new FileReader(amInfo.curtask.findFile("input_small.txt")));
+//
+//            nThreads = Integer.parseInt(in.readLine());
+//            String line;
+//
+//            while ((line = in.readLine()) != null) {
+//                full_text.append(line);
+//            }
+//        }
+//        catch (IOException e)
+//        {
+//            System.out.print("Reading input data error\n");
+//            e.printStackTrace();
+//            return;
+//        }
+//
+//        List<String> positiveWords = readListFromFile(amInfo, "positive_words.txt");
+//        List<String> negativeWords = readListFromFile(amInfo,"negative_words.txt");
+//
+//        List<String> sentences = List.of(full_text.toString().split("[.!?]"));
+//        List<String> non_empty_sentences = new ArrayList<>();
+//        int count = 0;
+//
+//        for (String sentence : sentences) {
+//            if (!sentence.trim().isEmpty()) {
+//                count++;
+//                non_empty_sentences.add(sentence);
+//            }
+//        }
+//
+//        System.out.println("Number of sentences: " + count);
+//
+//        List<List<String>> dividedLists = divideList(non_empty_sentences, nThreads);
+//
+//        List<point> points = new ArrayList<point>();
+//        List<channel> channels = new ArrayList<channel>();
+//
+//        // Connection to points
+//
+//        // Time counting
+//        long tStart = System.nanoTime();
+//
+//        int totalNegative = 0;
+//        int totalPositive = 0;
+//
+//        for(int i = 0; i < nThreads; i++)
+//        {
+//            System.out.println(i);
+//
+//            point p = amInfo.createPoint();
+//            channel c = p.createChannel();
+//
+//            points.add(p);
+//            channels.add(c);
+//
+//            Input input = new Input(positiveWords, negativeWords, dividedLists.get(i));
+//
+//            System.out.println(positiveWords.get(0));
+//            System.out.println(negativeWords.get(0));
+//            System.out.println(dividedLists.get(i).get(0));
+//
+//            p.execute("SentimentAnalyzerParcs");
+//            c.write(123);
+//
+//            System.out.println("Waiting for the result...");
+//
+//            Result result = (Result) (c.readObject());
+//
+//            totalPositive += result.getTotalPositive();
+//            totalNegative += result.getTotalNegative();
+//
+//        }
+//
+//        long tEnd = System.nanoTime();
+//
+//        if (totalPositive > totalNegative) {
+//            System.out.println("Positive");
+//        } else if (totalNegative > totalPositive) {
+//            System.out.println("Negative");
+//        } else {
+//            System.out.println("Neutral");
+//        }
+//
+//        System.out.println("Working time on " + nThreads + " processes: " + ((tEnd - tStart) / 1000000) + "ms");
+//    }
+//
     public static List<List<String>> divideList(List<String> originalList, int numberOfDivisions) {
         List<List<String>> dividedLists = new ArrayList<>();
 
@@ -146,12 +219,12 @@ public class Solver implements AM{
         return dividedLists;
     }
 
-    public static List<String> readListFromFile(AMInfo amInfo, String filePath){
+    public static List<String> readListFromFile(String file){
 
         List<String> lines = new ArrayList<>();
 
         try {
-            BufferedReader in = new BufferedReader(new FileReader(amInfo.curtask.findFile(filePath)));
+            BufferedReader in = new BufferedReader(new FileReader(file));
             String line;
 
             while ((line = in.readLine()) != null) {
