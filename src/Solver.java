@@ -44,109 +44,49 @@ public class Solver {
         List<channel> channels = new ArrayList<>();
         List<String> words = List.of(positive.split("[ ,\"']"));
 
-        point p1 = info.createPoint();
-        points.add(p1);
+        List<String> sentences = List.of(text.toString().split("[.!?]"));
+        List<String> non_empty_sentences = new ArrayList<>();
+        int count = 0;
 
-        channel c1 = p1.createChannel();
-        channels.add(c1);
+        for (String sentence : sentences) {
+            if (!sentence.trim().isEmpty()) {
+                count++;
+                non_empty_sentences.add(sentence);
+            }
+        }
 
-        System.out.println(words.get(0));
+        System.out.println("Number of sentences: " + count);
 
-        Input input = new Input(text, words.get(0), negative);
 
-        points.get(0).execute("SentimentAnalyzerParcs");
-        channels.get(0).write(input);
+        for (int i = 0; i < count; i++) {
+            String t = texts.get(i);
+            Integer shift = shifts.get(i);
 
-        System.out.println("Waiting for result .. ");
+            point p = info.createPoint();
+            points.add(p);
 
-        Result result = (Result) (channels.get(0).readObject());
+            channel c = p.createChannel();
+            channels.add(c);
 
-        point p2 = info.createPoint();
-        points.add(p2);
+            System.out.println(words.get(i) + " -- " + non_empty_sentences.get(i));
 
-        channel c2 = p2.createChannel();
-        channels.add(c2);
+            Input input = new Input(non_empty_sentences.get(i), words.get(i), negative);
 
-        System.out.println(words.get(1));
+            points.get(i).execute("SentimentAnalyzerParcs");
+            channels.get(i).write(input);
 
-        input = new Input(text, words.get(1), negative);
+            System.out.println("Waiting for result .. ");
 
-        points.get(1).execute("SentimentAnalyzerParcs");
-        channels.get(1).write(input);
-
-        System.out.println("Waiting for result .. ");
-
-        result = (Result) (channels.get(1).readObject());
-
-        point p3 = info.createPoint();
-        points.add(p3);
-
-        channel c3 = p3.createChannel();
-        channels.add(c3);
-
-        System.out.println(words.get(2));
-
-        input = new Input(text, words.get(2), negative);
-
-        points.get(2).execute("SentimentAnalyzerParcs");
-        channels.get(2).write(input);
-
-        System.out.println("Waiting for result .. ");
-
-        result = (Result) (channels.get(2).readObject());
-
-        point p4 = info.createPoint();
-        points.add(p4);
-
-        channel c4 = p4.createChannel();
-        channels.add(c4);
-
-        System.out.println(words.get(3));
-
-        input = new Input(text, words.get(3), negative);
-
-        points.get(3).execute("SentimentAnalyzerParcs");
-        channels.get(3).write(input);
-
-        System.out.println("Waiting for result .. ");
-
-        result = (Result) (channels.get(3).readObject());
-
-//        for (int i = 0; i < nThreads; i++) {
-//            String t = texts.get(i);
-//            Integer shift = shifts.get(i);
-//
-//            point p = info.createPoint();
-//            points.add(p);
-//
-//            channel c = p.createChannel();
-//            channels.add(c);
-//
-////            points.add(info.createPoint());
-////            channels.add(points.get(i).createChannel());
-////
-//
-//
-//
-//            System.out.println(words.get(i));
-//
-//            Input input = new Input(t, words.get(i), negative);
-//
-//            points.get(i).execute("SentimentAnalyzerParcs");
-//            channels.get(i).write(input);
-//
-//            System.out.println("Waiting for result .. ");
-//
-//            Result result = (Result) (channels.get(i).readObject());
-//            List<Integer> ins = result.getRes();
-//            if (ins.size() > 0) {
-//                System.out.println("Pattern ins : {");
-//                for (int index : ins) {
-//                    System.out.print(shift + index + " ");
-//                }
-//                System.out.println("}");
-//            }
-//        }
+            Result result = (Result) (channels.get(i).readObject());
+            List<Integer> ins = result.getRes();
+            if (ins.size() > 0) {
+                System.out.println("Pattern ins : {");
+                for (int index : ins) {
+                    System.out.print(shift + index + " ");
+                }
+                System.out.println("}");
+            }
+        }
 
 
         curtask.end();
@@ -271,18 +211,18 @@ public class Solver {
 ////
 ////        AMInfo info = new AMInfo(curtask, null);
 ////
-////        List<String> sentences = List.of(full_text.toString().split("[.!?]"));
-////        List<String> non_empty_sentences = new ArrayList<>();
-////        int count = 0;
-////
-////        for (String sentence : sentences) {
-////            if (!sentence.trim().isEmpty()) {
-////                count++;
-////                non_empty_sentences.add(sentence);
-////            }
-////        }
-////
-////        System.out.println("Number of sentences: " + count);
+//        List<String> sentences = List.of(full_text.toString().split("[.!?]"));
+//        List<String> non_empty_sentences = new ArrayList<>();
+//        int count = 0;
+//
+//        for (String sentence : sentences) {
+//            if (!sentence.trim().isEmpty()) {
+//                count++;
+//                non_empty_sentences.add(sentence);
+//            }
+//        }
+//
+//        System.out.println("Number of sentences: " + count);
 ////
 ////        List<List<String>> dividedLists = divideList(non_empty_sentences, nThreads);
 ////
