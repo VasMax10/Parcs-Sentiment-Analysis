@@ -42,7 +42,7 @@ public class Solver {
 
         List<point> points = new ArrayList<>();
         List<channel> channels = new ArrayList<>();
-
+        List<String> words = List.of(positive.split("[ ,\"']"));
         for (int i = 0; i < nThreads; i++) {
             String t = texts.get(i);
             Integer shift = shifts.get(i);
@@ -56,9 +56,9 @@ public class Solver {
             points.add(p);
             channels.add(c);
 
-            System.out.println(positive);
+            System.out.println(words.get(i));
 
-            Input input = new Input(t, positive, negative);
+            Input input = new Input(t, words.get(i), negative);
 
             points.get(i).execute("SentimentAnalyzerParcs");
             channels.get(i).write(input);
