@@ -18,20 +18,20 @@ public class Solver {
 
         AMInfo info = new AMInfo(curtask, null);
 
-        int N = 4;
-        int n = text.length() / N;
+        int nThreads = 4;
+        int n = text.length() / nThreads;
         int M = positive.length();
 
         List<String> texts = new ArrayList<>();
         List<Integer> shifts = new ArrayList<>();
 
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < nThreads; i++) {
             int l = i * n;
             int r = (i + 1) * n;
             String textPart = text.substring(l, r);
             texts.add(textPart);
             shifts.add(l);
-            if (i < N - 1) {
+            if (i < nThreads - 1) {
                 int ll = r - (M - 1);
                 int rr = r + M - 1;
                 String text1 = text.substring(ll, rr);
@@ -43,7 +43,7 @@ public class Solver {
         List<point> points = new ArrayList<>();
         List<channel> channels = new ArrayList<>();
 
-        for (int i = 0; i < texts.size(); i++) {
+        for (int i = 0; i < nThreads; i++) {
             String t = texts.get(i);
             Integer shift = shifts.get(i);
 
@@ -52,6 +52,8 @@ public class Solver {
 
             points.add(p);
             channels.add(c);
+
+            System.out.println(positive);
 
             Input input = new Input(t, positive);
 
