@@ -10,11 +10,11 @@ public class SentimentAnalyzerParcs implements AM {
 
         System.out.println("Got Input");
 
-        List<String> negativeWords = input.getNegativeWords();
+        List<String> negativeWords = new ArrayList<>(input.getNegativeWords());
         System.out.println("Negative");
-        List<String> positiveWords = input.getPositiveWords();
+        List<String> positiveWords = new ArrayList<>(input.getPositiveWords());
         System.out.println("Positive");
-        List<String> sentences     = input.getSentences();
+        List<String> sentences     = new ArrayList<>(input.getSentences());
         System.out.println("Sentences");
 
         for (String sentence: sentences){
