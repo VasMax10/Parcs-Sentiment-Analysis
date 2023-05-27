@@ -13,8 +13,8 @@ public class Solver {
         curtask.addJarFile("SentimentAnalyzerParcs.jar");
 
         String text = textFromFile( curtask.findFile("input") );
-        String positive = sentimentFromFile( curtask.findFile("positive_words.txt"));
-        String negative = sentimentFromFile( curtask.findFile("negative_words.txt"));
+        String positive = sentimentFromFile( curtask.findFile("positive_words2.txt"));
+        String negative = sentimentFromFile( curtask.findFile("negative_words2.txt"));
 
         AMInfo info = new AMInfo(curtask, null);
 
