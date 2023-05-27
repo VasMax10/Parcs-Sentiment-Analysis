@@ -58,7 +58,7 @@ public class Solver {
         System.out.println("Number of sentences: " + count);
 
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < nThreads; i++) {
 
             point p = info.createPoint();
             points.add(p);
@@ -68,7 +68,7 @@ public class Solver {
 
             System.out.println(words.get(0) + " -- " + non_empty_sentences.get(i));
 
-            Input input = new Input(non_empty_sentences.get(i), words.get(0), negative);
+            Input input = new Input(text, words.get(0), negative);
 
             points.get(i).execute("SentimentAnalyzerParcs");
             channels.get(i).write(input);
