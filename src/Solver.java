@@ -44,7 +44,7 @@ public class Solver implements AM{
         }
 
         List<String> positiveWords = readListFromFile(amInfo, "positive_words.txt");
-        List<String> negativeWords = readListFromFile(amInfo,"positive_words.txt");
+        List<String> negativeWords = readListFromFile(amInfo,"negative_words.txt");
 
         List<String> sentences = List.of(full_text.toString().split("[.!?]"));
         List<String> non_empty_sentences = new ArrayList<>();
