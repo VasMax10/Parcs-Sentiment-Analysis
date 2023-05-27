@@ -69,9 +69,10 @@ public class Solver{
 
             System.out.println("Waiting for result .. ");
 
-            Result result = (Result) (c.readObject());
-            System.out.println(result.getTotalNegative());
-            System.out.println(result.getTotalPositive());
+//            Result result = (Result) (c.readObject());
+
+//            System.out.println(result.getTotalNegative());
+//            System.out.println(result.getTotalPositive());
         }
         curtask.end();
     }
