@@ -68,9 +68,9 @@ public class Solver {
             channel c = p.createChannel();
             channels.add(c);
 
-            System.out.println(words.get(i) + " -- " + non_empty_sentences.get(i));
+            System.out.println(words.get(0) + " -- " + non_empty_sentences.get(i));
 
-            Input input = new Input(non_empty_sentences.get(i), words.get(i), negative);
+            Input input = new Input(non_empty_sentences.get(i), words.get(0), negative);
 
             points.get(i).execute("SentimentAnalyzerParcs");
             channels.get(i).write(input);
