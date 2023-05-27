@@ -1,11 +1,12 @@
 import java.io.Serializable;
+import java.util.List;
 
 public class Input implements Serializable {
     private String text;
-    private String positive;
-    private String negative;
+    private List<String> positive;
+    private List<String> negative;
 
-    public Input(String text, String positive, String negative) {
+    public Input(String text, List<String> positive, List<String> negative) {
         this.text = text;
         this.positive = positive;
         this.negative = negative;
@@ -15,11 +16,11 @@ public class Input implements Serializable {
         return text;
     }
 
-    public String getPositive() {
+    public List<String> getPositive() {
         return positive;
     }
 
-    public String getNegative() {
+    public List<String> getNegative() {
         return negative;
     }
 }

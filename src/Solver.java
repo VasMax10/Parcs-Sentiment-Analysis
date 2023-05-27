@@ -42,7 +42,6 @@ public class Solver {
 
         List<point> points = new ArrayList<>();
         List<channel> channels = new ArrayList<>();
-        List<String> words = List.of(positive.split("[ ,\"']"));
 
         List<String> sentences = List.of(text.toString().split("[.!?]"));
         List<String> non_empty_sentences = new ArrayList<>();
@@ -55,6 +54,9 @@ public class Solver {
             }
         }
 
+        List<String> positive_words = List.of(positive.split(" "));
+        List<String> negative_words = List.of(negative.split(" "));
+
         System.out.println("Number of sentences: " + count);
 
 
@@ -66,7 +68,7 @@ public class Solver {
             channel c = p.createChannel();
             channels.add(c);
 
-            Input input = new Input(text, words.get(0), negative);
+            Input input = new Input(text, positive_words, negative_words);
 
             points.get(i).execute("SentimentAnalyzerParcs");
             channels.get(i).write(input);

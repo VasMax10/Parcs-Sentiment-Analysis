@@ -1,5 +1,7 @@
 import parcs.*;
 
+import java.util.List;
+
 public class SentimentAnalyzerParcs implements AM {
 //    static int NO_OF_CHARS = 256;
 //
@@ -23,12 +25,12 @@ public class SentimentAnalyzerParcs implements AM {
 //    }
 
     // A pattern searching function that uses Bad Character Heuristic of Boyer Moore Algorithm
-    public Result AnalyzeSentiment(String text, String positive, String negative) {
+    public Result AnalyzeSentiment(String text, List<String> positive, List<String> negative) {
 
         Result result = new Result();
 
-        String[] positiveWords = positive.split("[ ,\"']");
-        String[] negativeWords = negative.split("[ ,\"']");
+//        String[] positiveWords = positive.split("[ ,\"']");
+//        String[] negativeWords = negative.split("[ ,\"']");
         int n = text.length();
 
         return result;
@@ -38,8 +40,8 @@ public class SentimentAnalyzerParcs implements AM {
         Input input = (Input) info.parent.readObject();
 
         String text = input.getText();
-        String positive = input.getPositive();
-        String negative = input.getNegative();
+        List<String> positive = input.getPositive();
+        List<String> negative = input.getNegative();
 
         System.out.println("Input : text = " + text + ", positive = " + positive + ", negative = " + negative);
 
