@@ -84,6 +84,10 @@ public class Solver implements AM{
 
             Input input = new Input(positiveWords, negativeWords, dividedLists.get(i));
 
+            System.out.println(positiveWords.get(0));
+            System.out.println(negativeWords.get(0));
+            System.out.println(dividedLists.get(i).get(0));
+
             p.execute("SentimentAnalyzerParcs");
             c.write(input);
 
