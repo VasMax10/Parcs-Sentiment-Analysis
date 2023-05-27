@@ -43,41 +43,76 @@ public class Solver {
         List<point> points = new ArrayList<>();
         List<channel> channels = new ArrayList<>();
         List<String> words = List.of(positive.split("[ ,\"']"));
-        for (int i = 0; i < nThreads; i++) {
-            String t = texts.get(i);
-            Integer shift = shifts.get(i);
 
-            point p = info.createPoint();
-            points.add(p);
+        point p1 = info.createPoint();
+        points.add(p1);
 
-            channel c = p.createChannel();
-            channels.add(c);
+        channel c1 = p1.createChannel();
+        channels.add(c1);
 
-//            points.add(info.createPoint());
-//            channels.add(points.get(i).createChannel());
+        System.out.println(words.get(0));
+
+        Input input = new Input(text, words.get(0), negative);
+
+        points.get(0).execute("SentimentAnalyzerParcs");
+        channels.get(0).write(input);
+
+        System.out.println("Waiting for result .. ");
+
+        Result result = (Result) (channels.get(0).readObject());
+
+        point p2 = info.createPoint();
+        points.add(p2);
+
+        channel c2 = p2.createChannel();
+        channels.add(c2);
+
+        System.out.println(words.get(1));
+
+        input = new Input(text, words.get(1), negative);
+
+        points.get(1).execute("SentimentAnalyzerParcs");
+        channels.get(1).write(input);
+
+        System.out.println("Waiting for result .. ");
+
+        result = (Result) (channels.get(1).readObject());
+
+//        for (int i = 0; i < nThreads; i++) {
+//            String t = texts.get(i);
+//            Integer shift = shifts.get(i);
 //
-
-
-
-            System.out.println(words.get(i));
-
-            Input input = new Input(t, words.get(i), negative);
-
-            points.get(i).execute("SentimentAnalyzerParcs");
-            channels.get(i).write(input);
-
-            System.out.println("Waiting for result .. ");
-
-            Result result = (Result) (channels.get(i).readObject());
-            List<Integer> ins = result.getRes();
-            if (ins.size() > 0) {
-                System.out.println("Pattern ins : {");
-                for (int index : ins) {
-                    System.out.print(shift + index + " ");
-                }
-                System.out.println("}");
-            }
-        }
+//            point p = info.createPoint();
+//            points.add(p);
+//
+//            channel c = p.createChannel();
+//            channels.add(c);
+//
+////            points.add(info.createPoint());
+////            channels.add(points.get(i).createChannel());
+////
+//
+//
+//
+//            System.out.println(words.get(i));
+//
+//            Input input = new Input(t, words.get(i), negative);
+//
+//            points.get(i).execute("SentimentAnalyzerParcs");
+//            channels.get(i).write(input);
+//
+//            System.out.println("Waiting for result .. ");
+//
+//            Result result = (Result) (channels.get(i).readObject());
+//            List<Integer> ins = result.getRes();
+//            if (ins.size() > 0) {
+//                System.out.println("Pattern ins : {");
+//                for (int index : ins) {
+//                    System.out.print(shift + index + " ");
+//                }
+//                System.out.println("}");
+//            }
+//        }
 
 
         curtask.end();
