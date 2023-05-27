@@ -6,8 +6,11 @@ public class SentimentAnalyzerParcs implements AM {
     @Override
     public void run(AMInfo amInfo) {
         System.out.println("Started");
-//        Input input = (Input) amInfo.parent.readObject() ;
-        String input = (String) amInfo.parent.readObject();
+
+        //        Input input = (Input) amInfo.parent.readObject() ;
+
+//        String input = (String) amInfo.parent.readObject();
+        int input = amInfo.parent.readInt();
         System.out.println("Got Input");
 
 //        List<String> negativeWords = new ArrayList<>(input.getNegativeWords());

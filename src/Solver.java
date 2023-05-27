@@ -89,7 +89,7 @@ public class Solver implements AM{
             System.out.println(dividedLists.get(i).get(0));
 
             p.execute("SentimentAnalyzerParcs");
-            c.write("input");
+            c.write(123);
 
             System.out.println("Waiting for the result...");
 
