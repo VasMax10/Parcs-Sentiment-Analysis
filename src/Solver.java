@@ -13,7 +13,7 @@ public class Solver {
         task curtask = new task();
         curtask.addJarFile("SentimentAnalyzerParcs.jar");
 
-        int nThreads = 1;
+        int nThreads = 3;
 
 //        String text = textFromFile(curtask.findFile("Combo.txt"));
 //        List<String> sentences = List.of(text.split("[.!?]"));
