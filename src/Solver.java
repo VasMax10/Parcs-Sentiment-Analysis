@@ -13,8 +13,8 @@ public class Solver {
         task curtask = new task();
         curtask.addJarFile("SentimentAnalyzerParcs.jar");
 
-        int nThreads = 1;
-        String text = textFromFile(curtask.findFile("Monte-Cristo.txt"));
+        int nThreads = 4;
+        String text = textFromFile(curtask.findFile("Combo.txt"));
 
         String positive = sentimentFromFile(curtask.findFile("positive_words2.txt"));
         String negative = sentimentFromFile(curtask.findFile("negative_words2.txt"));
@@ -52,7 +52,7 @@ public class Solver {
             channel c = p.createChannel();
             channels.add(c);
 
-            System.out.println("Num of lists in thread : " + dividedLists.get(i).size());
+            System.out.println("Num of sentences in thread : " + dividedLists.get(i).size());
 
             Input input = new Input(dividedLists.get(i), positive_words, negative_words);
 
