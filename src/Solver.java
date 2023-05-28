@@ -13,7 +13,7 @@ public class Solver {
         task curtask = new task();
         curtask.addJarFile("SentimentAnalyzerParcs.jar");
 
-        int nThreads = 2;
+        int nThreads = 1;
         String text = textFromFile(curtask.findFile("Monte-Cristo.txt"));
 
         String positive = sentimentFromFile(curtask.findFile("positive_words2.txt"));
