@@ -13,8 +13,8 @@ public class Solver {
         task curtask = new task();
         curtask.addJarFile("SentimentAnalyzerParcs.jar");
 
-        int nThreads = 1;
-        String text = textFromFile(curtask.findFile("Combo.txt"));
+        int nThreads = 4;
+        String text = textFromFile(curtask.findFile("Combo-x10.txt"));
 
         String positive = sentimentFromFile(curtask.findFile("positive_words2.txt"));
         String negative = sentimentFromFile(curtask.findFile("negative_words2.txt"));
@@ -26,7 +26,7 @@ public class Solver {
         List<point> points = new ArrayList<>();
         List<channel> channels = new ArrayList<>();
 
-        List<String> sentences = List.of(text.toString().split("[.!?]"));
+        List<String> sentences = List.of(text.split("[.!?]"));
         List<String> non_empty_sentences = new ArrayList<>();
         int count = 0;
 
@@ -98,13 +98,11 @@ public class Solver {
 
     public static String textFromFile(String filename) throws Exception {
 
-        String text = new Scanner(new File(filename)).useDelimiter("\\Z").next();
-
-        return text;
+        return new Scanner(new File(filename)).useDelimiter("\\Z").next();
     }
 
     public static String sentimentFromFile(String filename) throws Exception {
-        String pattern = "";
+        String pattern;
 
         Scanner sc = new Scanner(new File(filename));
 
