@@ -15,10 +15,10 @@ public class Solver {
 
         int nThreads = 2;
 
-//        String text = textFromFile(curtask.findFile("Combo.txt"));
-//        List<String> sentences = List.of(text.split("[.!?]"));
+        String text = textFromFile(curtask.findFile("Combo.txt"));
+        List<String> sentences = List.of(text.split("[.!?]"));
 
-        List<String> sentences = bigTextFromFile(curtask.findFile("Combo-x5-v2.txt"));
+//        List<String> sentences = bigTextFromFile(curtask.findFile("Combo-x5-v2.txt"));
 
         String positive = sentimentFromFile(curtask.findFile("positive_words2.txt"));
         String negative = sentimentFromFile(curtask.findFile("negative_words2.txt"));
