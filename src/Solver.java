@@ -13,8 +13,8 @@ public class Solver {
         task curtask = new task();
         curtask.addJarFile("SentimentAnalyzerParcs.jar");
 
-        int nThreads = 1;
-        String text = textFromFile(curtask.findFile("Moby-Dick"));
+        int nThreads = 4;
+        String text = textFromFile(curtask.findFile("Sherlock.txt"));
 
         String positive = sentimentFromFile(curtask.findFile("positive_words2.txt"));
         String negative = sentimentFromFile(curtask.findFile("negative_words2.txt"));
@@ -79,7 +79,7 @@ public class Solver {
 
         long tEnd = System.nanoTime();
 
-        System.out.println("Total: positive - " + posRes + ", negative - " + negRes);
+        System.out.println("Total : positive - " + posRes + ", negative - " + negRes);
 
         if (posRes > negRes) {
             System.out.println("It seems that this text is Positive");
@@ -120,7 +120,6 @@ public class Solver {
         int sublistSize = listSize / numberOfDivisions;
         int mod = listSize % numberOfDivisions;
 
-        System.out.println("mod = " + mod);
 
         int startIndex = 0;
         int endIndex = sublistSize;
