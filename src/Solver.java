@@ -62,17 +62,34 @@ public class Solver {
             System.out.println("Waiting for result .. ");
         }
 
+        Integer posRes = 0;
+        Integer negRes = 0;
+
         for (int i = 0; i < nThreads; i++) {
             Result result = (Result) (channels.get(i).readObject());
 
             Integer posCount = result.getPositiveCount();
             Integer negCount = result.getNegativeCount();
 
-            System.out.println(posCount + " " + negCount);
+            posRes += posCount;
+            negRes += negCount;
 
+            System.out.println("Thread: positive - " + posCount + ", negative - " + negCount);
         }
 
         long tEnd = System.nanoTime();
+
+        System.out.println("Total: positive - " + posRes + ", negative - " + negRes);
+
+        if (posRes > negRes) {
+            System.out.println("It seems that this text is Positive");
+        } else if (negRes > posRes) {
+            System.out.println("It seems that this text is Negative");
+        } else {
+            System.out.println("It seems that this text is Neutral");
+        }
+
+        System.out.println();
 
         System.out.println("Working time on " + nThreads + " processes: " + ((tEnd - tStart) / 1000000) + "ms");
 
