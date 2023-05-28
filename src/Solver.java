@@ -15,8 +15,9 @@ public class Solver {
 
         int nThreads = 4;
 
-        String text = textFromFile(curtask.findFile("Combo.txt"));
-//        List<String> sentences = bigTextFromFile(curtask.findFile("Combo-x5.txt"));
+//        String text = textFromFile(curtask.findFile("Combo.txt"));
+//        List<String> sentences = List.of(text.split("[.!?]"));
+        List<String> sentences = bigTextFromFile(curtask.findFile("Combo-x5.txt"));
 
         String positive = sentimentFromFile(curtask.findFile("positive_words2.txt"));
         String negative = sentimentFromFile(curtask.findFile("negative_words2.txt"));
@@ -28,7 +29,6 @@ public class Solver {
         List<point> points = new ArrayList<>();
         List<channel> channels = new ArrayList<>();
 
-        List<String> sentences = List.of(text.split("[.!?]"));
         List<String> non_empty_sentences = new ArrayList<>();
         int count = 0;
 
