@@ -62,14 +62,10 @@ public class Solver {
 
             Input input = new Input(dividedLists.get(i), positive_words, negative_words);
 
-//            points.get(i).execute("SentimentAnalyzerParcs");
+            points.get(i).execute("SentimentAnalyzerParcs");
             channels.get(i).write(input);
 
             System.out.println("Waiting for result .. ");
-        }
-
-        for (int i = 0; i < nThreads; i++) {
-            points.get(i).execute("SentimentAnalyzerParcs");
         }
 
         Integer posRes = 0;
