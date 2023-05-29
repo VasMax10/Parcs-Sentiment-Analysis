@@ -1,6 +1,8 @@
 import parcs.*;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,12 +15,23 @@ public class Solver {
         task curtask = new task();
         curtask.addJarFile("SentimentAnalyzerParcs.jar");
 
-        int nThreads = 3;
+        // Using Scanner for Getting Input from User
+        Scanner consoleInput = new Scanner(System.in);
+
+        System.out.println("Enter nThreads value: ");
+        int nThreads = consoleInput.nextInt();
+        System.out.println("You entered value for nThreads: " + nThreads);
+
+        System.out.println("Enter filename: ");
+        String fileName = consoleInput.nextLine();
+        System.out.println("You entered filename: " + fileName);
+//        int nThreads = 4;
 
 //        String text = textFromFile(curtask.findFile("Moby-Dick.txt"));
 //        List<String> sentences = List.of(text.split("[.!?]"));
 
-        List<String> sentences = bigTextFromFile(curtask.findFile("input_small_2.txt"));
+//        List<String> sentences = bigTextFromFile(curtask.findFile("input_small_2.txt"));
+        List<String> sentences = bigTextFromFile(curtask.findFile(fileName));
 
         String positive = sentimentFromFile(curtask.findFile("positive_words2.txt"));
         String negative = sentimentFromFile(curtask.findFile("negative_words2.txt"));
@@ -59,10 +72,14 @@ public class Solver {
 
             Input input = new Input(dividedLists.get(i), positive_words, negative_words);
 
-            points.get(i).execute("SentimentAnalyzerParcs");
+//            points.get(i).execute("SentimentAnalyzerParcs");
             channels.get(i).write(input);
 
             System.out.println("Waiting for result .. ");
+        }
+
+        for (int i = 0; i < nThreads; i++) {
+            points.get(i).execute("SentimentAnalyzerParcs");
         }
 
         Integer posRes = 0;
