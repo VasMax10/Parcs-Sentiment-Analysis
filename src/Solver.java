@@ -13,12 +13,12 @@ public class Solver {
         task curtask = new task();
         curtask.addJarFile("SentimentAnalyzerParcs.jar");
 
-        int nThreads = 3;
+        int nThreads = 1;
 
-//        String text = textFromFile(curtask.findFile("Combo.txt"));
-//        List<String> sentences = List.of(text.split("[.!?]"));
-
-        List<String> sentences = bigTextFromFile(curtask.findFile("Combo-x10.txt"));
+        String text = textFromFile(curtask.findFile("input_small.txt"));
+        List<String> sentences = List.of(text.split("[.!?]"));
+//
+//        List<String> sentences = bigTextFromFile(curtask.findFile("Combo-x10.txt"));
 
         String positive = sentimentFromFile(curtask.findFile("positive_words2.txt"));
         String negative = sentimentFromFile(curtask.findFile("negative_words2.txt"));
