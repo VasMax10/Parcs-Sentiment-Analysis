@@ -18,10 +18,10 @@ public class Solver {
 
         int nThreads = 4;
 
-//        String text = textFromFile(curtask.findFile("Moby-Dick.txt"));
-//        List<String> sentences = List.of(text.split("[.!?]"));
-
-        List<String> sentences = bigTextFromFile(curtask.findFile("input_small_2.txt"));
+        String text = textFromFile(curtask.findFile("Moby-Dick.txt"));
+        List<String> sentences = List.of(text.split("[.!?]"));
+//
+//        List<String> sentences = bigTextFromFile(curtask.findFile("input_small_2.txt"));
 
         String positive = sentimentFromFile(curtask.findFile("positive_words2.txt"));
         String negative = sentimentFromFile(curtask.findFile("negative_words2.txt"));
