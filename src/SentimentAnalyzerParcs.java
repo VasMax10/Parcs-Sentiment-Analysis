@@ -42,6 +42,10 @@ public class SentimentAnalyzerParcs implements AM {
 
         System.out.println("Input : sentences count = " + sentences.size());
 
-        info.parent.write(AnalyzeSentiment(sentences, positive, negative));
+        Result result = AnalyzeSentiment(sentences, positive, negative);
+        info.parent.write(result);
+
+        System.out.println("The thread has ended job with result: ");
+        System.out.println("Positive count = " + result.getPositiveCount() + ", negative count = " + result.getNegativeCount());
     }
 }

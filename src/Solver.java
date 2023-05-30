@@ -18,7 +18,7 @@ public class Solver {
 
         int nThreads = 4;
 
-        String text = textFromFile(curtask.findFile("Moby-Dick.txt"));
+        String text = textFromFile(curtask.findFile("Monte-Cristo.txt"));
         List<String> sentences = List.of(text.split("[.!?]"));
 //
 //        List<String> sentences = bigTextFromFile(curtask.findFile("input_small_2.txt"));
